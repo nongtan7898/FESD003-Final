@@ -1,0 +1,134 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg" style="width: 400px">
+    <div *ngIf="alert201 == true" class="alert alert-success" role="alert">
+      <strong>[201]</strong> ลงทะเบียนสำเร็จ!
+    </div>
+    <div *ngIf="alert500 == true" class="alert alert-danger" role="alert">
+      <strong>[500]</strong> Server / Script Error
+    </div>
+    <div *ngIf="alert422 == true" class="alert alert-warning" role="alert">
+      <strong>[422]</strong> Email นี้ใช้ลงทะเบียนไปแล้ว
+    </div>
+    <div *ngIf="alert400 == true" class="alert alert-warning" role="alert">
+      <strong>[400]</strong> เบอร์โทรศัพท์ไม่ใช่ตัวเลข
+    </div>
+    <div *ngIf="alert400_2 == true" class="alert alert-warning" role="alert">
+      <strong>[400]</strong> ลงทะเบียนไม่สำเร็จ
+    </div>
+    <h3 class="text-center">ลงทะเบียน</h3>
+    <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">อีเมล</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="text&#64;gmail.com"
+          formControlName="userEmail"
+        />
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userEmail')?.errors?.['required'] && (myform.get('userEmail')?.dirty || myform.get('userEmail')?.touched)"
+        >
+          <small>กรุณาระบุข้อมูล "อีเมล"</small>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userEmail')?.errors?.['email'] && myform.get('userEmail')?.touched"
+        >
+          <small
+            >กรุณาระบุข้อมูลอีเมลให้ถูกต้อง เช่น "text&#64;gmail.com"</small
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">รหัสผ่าน</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="********"
+          formControlName="userPassword"
+        />
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userPassword')?.errors?.['required'] && (myform.get('userPassword')?.dirty || myform.get('userPassword')?.touched)"
+        >
+          <small>กรุณาระบุข้อมูล "รหัสผ่าน"</small>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userPassword')?.errors?.['minlength'] && (myform.get('userPassword')?.dirty || myform.get('userPassword')?.touched)"
+        >
+          <small>รหัสผ่านต้องอย่างน้อย 8 ตัวอักษร</small>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userPassword')?.errors?.['maxlength'] && (myform.get('userPassword')?.dirty || myform.get('userPassword')?.touched)"
+        >
+          <small>รหัสผ่านต้องไม่เกิน 15 ตัวอักษร</small>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="firstName" class="form-label">ชื่อ</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          name="firstName"
+          placeholder="test"
+          formControlName="userFirstName"
+        />
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userFirstName')?.errors?.['required'] && (myform.get('userFirstName')?.dirty || myform.get('userFirstName')?.touched)"
+        >
+          <small>กรุณาระบุข้อมูล "ชื่อ"</small>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">นามสกุล</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          name="lastName"
+          placeholder="test"
+          formControlName="userLastName"
+        />
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userLastName')?.errors?.['required'] && (myform.get('userLastName')?.dirty || myform.get('userLastName')?.touched)"
+        >
+          <small>กรุณาระบุข้อมูล "นามสกุล"</small>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="telephone" class="form-label">เบอร์โทรศัพท์</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          name="telephone"
+          placeholder="0871234567"
+          formControlName="userTel"
+        />
+        <div
+          class="text-danger"
+          *ngIf="myform.get('userTel')?.errors?.['required'] && (myform.get('userTel')?.dirty || myform.get('userTel')?.touched)"
+        >
+          <small>กรุณาระบุข้อมูล "เบอร์โทรศัพท์"</small>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="myform.invalid"
+      >
+        ลงทะเบียน
+      </button>
+    </form>
+  </div>
+</div>
